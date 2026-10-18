@@ -246,7 +246,7 @@ footer p {
     height: 100%;
     opacity: 1;
     pointer-events: none;
-    transition: opacity 300ms ease;
+    transition: opacity 150ms ease;
 }
 
 #static-transition.is-hidden {

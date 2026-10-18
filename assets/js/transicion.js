@@ -82,6 +82,6 @@
         drawNoise();
         window.setTimeout(() => {
             window.location.href = destination.href;
-        }, 400);
+        }, 200);
     });
 })();
