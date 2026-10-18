@@ -1,0 +1,33 @@
+services:
+  web-app:
+    build: .
+    container_name: mvc_app_container
+    ports:
+      - "8080:80"
+    depends_on:
+      - db-mysql
+
+  db-mysql:
+    image: mysql:8.0
+    container_name: mvc_mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: clave_secreta_nube
+      MYSQL_DATABASE: db_proyecto_mvc
+    ports:
+      - "3306:3306"
+    volumes:
+      - datos-persistentes:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: mvc_phpmyadmin_container
+    ports:
+      - "8085:80"
+    environment:
+      PMA_HOST: db-mysql
+      MYSQL_ROOT_PASSWORD: clave_secreta_nube
+    depends_on:
+      - db-mysql
+
+volumes:
+  datos-persistentes:

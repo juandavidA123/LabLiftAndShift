@@ -1,56 +1,308 @@
-/* assets/css/estilos.css */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-body { 
-    font-family: Arial, sans-serif; 
-    margin: 0; 
-    padding: 0; 
-    background-color: #fafafa; 
+:root {
+    color-scheme: dark;
+    font-family: 'VT323', 'Share Tech Mono', monospace;
+    color: #9dffb0;
+    background: #000;
+    font-synthesis: none;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: none;
+    --phosphor: #9dffb0;
+    --amber: #ffb000;
+    --panel: rgba(0, 10, 5, 0.82);
+    --white: #f4ffef;
 }
 
-header { 
-    background-color: #2c3e50; 
-    color: white; 
-    padding: 20px; 
-    text-align: center; 
+* {
+    box-sizing: border-box;
 }
 
-nav ul { 
-    list-style-type: none; 
-    padding: 0; 
-    margin: 15px 0 0 0; 
-    display: flex; 
-    justify-content: center; 
-    gap: 20px; 
+html {
+    min-height: 100%;
+    background: #000;
 }
 
-nav a { 
-    color: #ecf0f1; 
-    text-decoration: none; 
-    font-weight: bold; 
-    padding: 8px 16px; 
-    border-radius: 4px; 
-    transition: background 0.3s; 
+body {
+    position: relative;
+    isolation: isolate;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1px 20px 20px;
+    overflow-x: hidden;
+    background: transparent;
+    color: var(--phosphor);
+    font-size: 23px;
+    line-height: 1.25;
+    text-shadow: 0 0 5px rgba(157, 255, 176, 0.5);
 }
 
-nav a:hover { 
-    background-color: #34495e; 
-    color: #3498db; 
+body::before {
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+    background:
+        linear-gradient(rgba(0, 22, 10, 0.45), rgba(0, 22, 10, 0.45)),
+        url('../img/Alien1.webp') center / cover no-repeat;
+    filter: blur(6px) brightness(0.45);
+    transform: scale(1.1);
+    content: '';
+    pointer-events: none;
 }
 
-#contenedor-principal { 
-    max-width: 900px; 
-    margin: 30px auto; 
-    padding: 30px; 
-    background-color: white; 
-    min-height: 350px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-    border-radius: 8px; 
+body::after {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    background:
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0 1px, transparent 1px 3px),
+        radial-gradient(ellipse at center, transparent 48%, rgba(0, 0, 0, 0.62) 100%);
+    content: '';
+    pointer-events: none;
+    animation: crt-flicker 5s infinite;
 }
 
-footer { 
-    background-color: #333; 
-    color: #bbb; 
-    text-align: center; 
-    padding: 15px; 
-    font-size: 14px; 
+header,
+#contenedor-principal,
+footer {
+    width: min(100%, 1000px);
+    margin-right: auto;
+    margin-left: auto;
+    border: 2px solid var(--white);
+    background: var(--panel);
+    box-shadow: 0 0 15px rgba(157, 255, 176, 0.18), inset 0 0 18px rgba(0, 0, 0, 0.6);
+}
+
+header {
+    margin-top: 28px;
+    padding: 18px 24px 22px;
+    text-align: center;
+}
+
+header::before,
+footer::before {
+    display: block;
+    color: var(--amber);
+    font-size: 18px;
+    letter-spacing: 0.12em;
+    text-shadow: 0 0 7px rgba(255, 176, 0, 0.55);
+}
+
+header::before {
+    content: 'SISTEMA: NOSTROMO  //  TERMINAL 0X-MU/TH/UR 6000';
+}
+
+h1,
+h2 {
+    color: var(--white);
+    letter-spacing: 0.12em;
+    line-height: 1.05;
+    text-transform: uppercase;
+    text-shadow: 0 0 8px rgba(157, 255, 176, 0.65);
+}
+
+header h1 {
+    margin: 14px 0 20px;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav a,
+button {
+    display: inline-block;
+    border: 2px solid var(--white);
+    border-radius: 0;
+    padding: 8px 20px;
+    background: transparent;
+    color: var(--white);
+    font: inherit;
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 120ms ease, background-color 120ms ease, box-shadow 120ms ease, text-shadow 120ms ease;
+}
+
+nav a:hover,
+nav a:focus-visible,
+button:hover,
+button:focus-visible {
+    outline: none;
+    border-color: var(--phosphor);
+    color: var(--phosphor);
+    box-shadow: 0 0 12px rgba(157, 255, 176, 0.75), inset 0 0 10px rgba(157, 255, 176, 0.15);
+    text-shadow: 0 0 8px var(--phosphor);
+}
+
+nav a:active,
+button:active {
+    background: var(--white);
+    color: #000;
+    text-shadow: none;
+}
+
+#contenedor-principal {
+    min-height: 350px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: clamp(20px, 5vw, 38px);
+}
+
+#contenedor-principal h2:first-child,
+#contenedor-principal h1:first-child {
+    margin-top: 0;
+}
+
+p,
+li {
+    color: var(--phosphor);
+}
+
+li {
+    margin: 5px 0;
+}
+
+a {
+    color: var(--phosphor);
+}
+
+form {
+    max-width: 650px;
+}
+
+form label {
+    display: block;
+    margin: 16px 0 5px;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+form label::before {
+    color: var(--amber);
+    content: '> ';
+}
+
+form input,
+form textarea {
+    display: block;
+    width: 100%;
+    border: 2px solid var(--white);
+    border-radius: 0;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.72);
+    color: var(--phosphor);
+    font: inherit;
+    font-size: 22px;
+    caret-color: var(--phosphor);
+}
+
+form textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+form input:focus,
+form textarea:focus {
+    outline: 2px solid var(--white);
+    outline-offset: 3px;
+    box-shadow: 0 0 10px rgba(244, 255, 239, 0.45);
+}
+
+form button {
+    margin-top: 8px;
+}
+
+footer {
+    margin-bottom: 20px;
+    padding: 12px 20px;
+    text-align: center;
+}
+
+footer::before {
+    content: 'FIN DE TRANSMISION // SISTEMA ACTIVO';
+}
+
+footer p {
+    margin: 7px 0 0;
+    color: var(--white);
+}
+
+#static-transition {
+    position: fixed;
+    z-index: 2000;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 300ms ease;
+}
+
+#static-transition.is-hidden {
+    opacity: 0;
+}
+
+#static-transition.is-transitioning {
+    transition: none;
+}
+
+@keyframes crt-flicker {
+    0%, 100% { opacity: 1; }
+    49% { opacity: 0.98; }
+    50% { opacity: 0.94; }
+    51% { opacity: 0.99; }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding-right: 12px;
+        padding-left: 12px;
+        font-size: 20px;
+    }
+
+    header {
+        margin-top: 12px;
+        padding: 16px 12px;
+    }
+
+    header::before,
+    footer::before {
+        font-size: 15px;
+    }
+
+    nav ul {
+        gap: 8px;
+    }
+
+    nav a {
+        padding: 7px 12px;
+        font-size: 19px;
+    }
+
+    #contenedor-principal {
+        min-height: 300px;
+        margin-top: 14px;
+        margin-bottom: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+    }
 }
